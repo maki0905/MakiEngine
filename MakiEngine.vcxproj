@@ -82,7 +82,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CommandList.cpp" />
+    <ClCompile Include="CommandQueue.cpp" />
+    <ClCompile Include="CommandManager.cpp" />
+    <ClCompile Include="Depth.cpp" />
+    <ClCompile Include="Device.cpp" />
+    <ClCompile Include="DirectXApp.cpp" />
+    <ClCompile Include="Externals\imgui\imgui.cpp" />
+    <ClCompile Include="Externals\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Externals\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Externals\imgui\imgui_impl_dx12.cpp" />
+    <ClCompile Include="Externals\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="Externals\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Fence.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="WindowsAPI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CommandList.h" />
+    <ClInclude Include="CommandQueue.h" />
+    <ClInclude Include="CommandManager.h" />
+    <ClInclude Include="Depth.h" />
+    <ClInclude Include="Device.h" />
+    <ClInclude Include="DirectXApp.h" />
+    <ClInclude Include="Externals\imgui\imconfig.h" />
+    <ClInclude Include="Externals\imgui\imgui.h" />
+    <ClInclude Include="Externals\imgui\imgui_impl_dx12.h" />
+    <ClInclude Include="Externals\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="Externals\imgui\imgui_internal.h" />
+    <ClInclude Include="Externals\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Externals\imgui\imstb_textedit.h" />
+    <ClInclude Include="Externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="Fence.h" />
+    <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="WindowsAPI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Externals\imgui\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
