@@ -85,7 +85,7 @@ Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> Depth::CreateDescriptorHeap(D3D12_D
 	HRESULT hr = S_FALSE;
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> result = nullptr;
 	D3D12_DESCRIPTOR_HEAP_DESC dsvDescriptorHeap{};
-	dsvDescriptorHeap.NumDescriptors = numDescriptors;  // 深度ビューは1つ
+	dsvDescriptorHeap.NumDescriptors = numDescriptors; // 深度ビューは1つ
 	dsvDescriptorHeap.Type = heapType; // デプスステンシルビュー
 	dsvDescriptorHeap.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 	hr = device_->CreateDescriptorHeap(&dsvDescriptorHeap, IID_PPV_ARGS(&result));

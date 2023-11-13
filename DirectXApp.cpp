@@ -39,57 +39,25 @@ void DirectXApp::Run()
 
 void DirectXApp::PreDraw()
 {
-	HRESULT result = S_FALSE;
-	// バックバッファの番号を取得（2つなので0番か1番）
-	UINT bbIndex = swapChain_->GetBackBuffer();
+	commandManager_->BarrierChange(swapChain_->GetSwapChain(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 
-	// リソースバリアを変更（表示状態→描画対象）
-	D3D12_RESOURCE_BARRIER barrier{};
-	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	result = swapChain_->GetSwapChain()->GetBuffer(bbIndex, IID_PPV_ARGS(&barrier.Transition.pResource));
-	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
-	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	commandManager_->GetCommandList()->ResourceBarrier(1, &barrier);
-
-	//renderTarget_->SetRender(depth_->GetDescriptorHeap());
-
-	//UINT bbIndex = swapChain_->GetSwapChain()->GetCurrentBackBufferIndex();
-	// レンダーターゲットビュー用ディスクリプタヒープのハンドルを取得
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvH[2];
-	rtvH[0] = renderTarget_->GetDescriptorHeap()->GetCPUDescriptorHandleForHeapStart();
-	rtvH[1].ptr = rtvH[0].ptr + device_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-	// 深度ステンシルビュー用デスクリプタヒープのハンドルを取得
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle =
-		D3D12_CPU_DESCRIPTOR_HANDLE(depth_->GetDescriptorHeap()->GetCPUDescriptorHandleForHeapStart());
-	// レンダーターゲットをセット
-	commandManager_->GetCommandList()->OMSetRenderTargets(1, &rtvH[bbIndex], false, nullptr);
+	commandManager_->SetRenderTargets(swapChain_->GetSwapChain(), renderTarget_->GetRtvHandles(), depth_->GetDescriptorHeap());
 
 	// 全画面クリア
 	renderTarget_->ClearRenderTarget();
 	// 深度バッファクリア
 	depth_->ClearDepthView();
 
-	// ビューポートの設定
-	D3D12_VIEWPORT viewport =
-		D3D12_VIEWPORT(0.0f, 0.0f, float(WindowsAPI::GetInstance()->kWindowWidth), float(WindowsAPI::GetInstance()->kWindowHeight));
-	commandManager_->GetCommandList()->RSSetViewports(1, &viewport);
-	// シザリング矩形の設定
-	D3D12_RECT rect = D3D12_RECT(0, 0, WindowsAPI::GetInstance()->kWindowWidth, WindowsAPI::GetInstance()->kWindowHeight);
-	commandManager_->GetCommandList()->RSSetScissorRects(1, &rect);
+	commandManager_->SetViewport(float(WindowsAPI::GetInstance()->kWindowWidth), float(WindowsAPI::GetInstance()->kWindowHeight));
+
+	commandManager_->SetRect(WindowsAPI::GetInstance()->kWindowWidth, WindowsAPI::GetInstance()->kWindowHeight);
 }
 
 void DirectXApp::PostDraw()
 {
 	HRESULT result = S_FALSE;
 
-	// リソースバリアを変更（描画対象→表示状態）
-	UINT bbIndex = swapChain_->GetSwapChain()->GetCurrentBackBufferIndex();
-	D3D12_RESOURCE_BARRIER barrier{};
-	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	result = swapChain_->GetSwapChain()->GetBuffer(bbIndex, IID_PPV_ARGS(&barrier.Transition.pResource));
-	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
-	commandManager_->GetCommandList()->ResourceBarrier(1, &barrier);
+	commandManager_->BarrierChange(swapChain_->GetSwapChain(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 
 	// 命令のクローズ
 	commandManager_->GetCommandList()->Close();
@@ -116,7 +84,7 @@ void DirectXApp::PostDraw()
 
 	fence_->waitForCommandsToFinish();
 
-	commandManager_->GetCommandAllocator()->Reset(); // キューをクリア
-	commandManager_->GetCommandList()->Reset(commandManager_->GetCommandAllocator(),
-		nullptr); // 再びコマンドリストを貯める準備
+	commandManager_->CommandClear();
+
+	
 }

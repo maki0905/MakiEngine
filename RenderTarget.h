@@ -43,6 +43,11 @@ public:
 	ID3D12DescriptorHeap* GetDescriptorHeap() {
 		return rtvDescriptorHeap_.Get();
 	}
+
+	D3D12_CPU_DESCRIPTOR_HANDLE* GetRtvHandles() {
+		return rtvHandles_;
+	}
+
 private:
 	/// <summary>
 	/// レンダーターゲットの生成
@@ -64,5 +69,7 @@ private:
 	std::vector<Microsoft::WRL::ComPtr<ID3D12Resource>> backBuffers_;
 
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtvDescriptorHeap_;
+
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles_[2];
 };
 

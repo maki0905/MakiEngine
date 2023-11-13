@@ -35,14 +35,9 @@ void RenderTarget::ClearRenderTarget()
 {
 	UINT bbIndex = swapChain_->GetCurrentBackBufferIndex();
 
-	// レンダーターゲットビュー用ディスクリプタヒープのハンドルを取得
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvH[2];
-	rtvH[0] = rtvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
-	rtvH[1].ptr = rtvH[0].ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-
 	// 全画面クリア        Red   Green Blue  Alpha
 	float clearColor[] = { 0.1f, 0.25f, 0.5f, 0.0f }; // 青っぽい色
-	commandList_->ClearRenderTargetView(rtvH[bbIndex], clearColor, 0, nullptr);
+	commandList_->ClearRenderTargetView(rtvHandles_[bbIndex], clearColor, 0, nullptr);
 
 }
 
@@ -82,6 +77,9 @@ HRESULT RenderTarget::CreateRenderTargets()
 		// レンダーターゲットビューの生成
 		device_->CreateRenderTargetView(backBuffers_[i].Get(), &renderTargetViewDesc, handle);
 	}
+
+	rtvHandles_[0] = rtvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
+	rtvHandles_[1].ptr = rtvHandles_[0].ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
 	return result;
 }
