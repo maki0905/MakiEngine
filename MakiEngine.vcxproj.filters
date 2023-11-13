@@ -22,6 +22,9 @@
     <Filter Include="Base\Command">
       <UniqueIdentifier>{177f0ea3-2635-456a-baca-adbf83d40165}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{1863f9f9-b148-48fa-a881-5002ce3fad9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,11 +75,14 @@
     <ClCompile Include="Device.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXApp.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Fence.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXApp.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="PSO.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,16 +134,27 @@
     <ClInclude Include="Device.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXApp.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Fence.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXApp.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="PSO.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Externals\imgui\LICENSE.txt">
       <Filter>Imgui</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="BasicVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="BasicPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
