@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CommandAllocatorPool.cpp" />
     <ClCompile Include="CommandList.cpp" />
     <ClCompile Include="CommandQueue.cpp" />
     <ClCompile Include="CommandManager.cpp" />
@@ -97,12 +98,14 @@
     <ClCompile Include="Externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Fence.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PSO.cpp" />
+    <ClCompile Include="PipelineState.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="RootSignature.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="WindowsAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommandAllocatorPool.h" />
     <ClInclude Include="CommandList.h" />
     <ClInclude Include="CommandQueue.h" />
     <ClInclude Include="CommandManager.h" />
@@ -118,8 +121,9 @@
     <ClInclude Include="Externals\imgui\imstb_textedit.h" />
     <ClInclude Include="Externals\imgui\imstb_truetype.h" />
     <ClInclude Include="Fence.h" />
-    <ClInclude Include="PSO.h" />
+    <ClInclude Include="PipelineState.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="RootSignature.h" />
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="WindowsAPI.h" />
   </ItemGroup>

@@ -81,7 +81,13 @@
     <ClCompile Include="DirectXApp.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="PSO.cpp">
+    <ClCompile Include="PipelineState.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="RootSignature.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandAllocatorPool.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,7 +146,13 @@
     <ClInclude Include="DirectXApp.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="PSO.h">
+    <ClInclude Include="PipelineState.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="RootSignature.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandAllocatorPool.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
